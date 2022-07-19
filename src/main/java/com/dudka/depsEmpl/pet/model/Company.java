@@ -2,7 +2,6 @@ package com.dudka.depsEmpl.pet.model;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +22,6 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name= "company")
 public class Company {
@@ -30,11 +29,12 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "company_name", nullable = false)
     private String name;
 
     @OneToMany(
-            mappedBy = "companyId",
+            fetch = FetchType.LAZY,
+            mappedBy = "company_id",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
