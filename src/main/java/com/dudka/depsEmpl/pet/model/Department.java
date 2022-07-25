@@ -1,5 +1,6 @@
 package com.dudka.depsEmpl.pet.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,5 +52,15 @@ public class Department {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, empRoleDeps, companyId);
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", empRoleDeps=" + empRoleDeps +
+                ", companyId=" + companyId +
+                '}';
     }
 }

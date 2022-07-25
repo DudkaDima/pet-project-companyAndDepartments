@@ -1,5 +1,6 @@
 package com.dudka.depsEmpl.pet.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,14 +28,25 @@ public class EmpRoleDep {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "emp_id")
+
     private Employee employee;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
+
     private Department department;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
+
     private Role role;
 
+    @Override
+    public String toString() {
+        return "EmpRoleDep{" +
+                "id=" + id +
+                ", department=" + department.getName() +
+                ", role=" + role.getName() +
+                '}';
+    }
 }

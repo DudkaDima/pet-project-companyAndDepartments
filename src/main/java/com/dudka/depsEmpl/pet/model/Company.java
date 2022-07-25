@@ -34,11 +34,10 @@ public class Company {
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy = "company_id",
+            mappedBy = "companyId",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-
     private List<Department> departments;
 
     @Override

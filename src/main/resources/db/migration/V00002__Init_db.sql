@@ -30,16 +30,17 @@
   role_id int8,
   primary key (id)
   );
-
-  alter table if exists emp_role_dep add constraint Fk_dep_all foreign key (department_id) references department;
-  alter table if exists emp_role_dep add constraint Fk_emp_all foreign key (emp_id) references employee;
-  alter table if exists emp_role_dep add constraint Fk_role_all foreign key (role_id) references role;
-
   create table role (
   id  bigserial not null,
   role_name varchar(255) not null,
   salary varchar(255) not null,
   primary key (id)
   );
+
+  alter table if exists emp_role_dep add constraint Fk_dep_all foreign key (department_id) references department;
+  alter table if exists emp_role_dep add constraint Fk_emp_all foreign key (emp_id) references employee;
+  alter table if exists emp_role_dep add constraint Fk_role_all foreign key (role_id) references role;
+
+
 
 

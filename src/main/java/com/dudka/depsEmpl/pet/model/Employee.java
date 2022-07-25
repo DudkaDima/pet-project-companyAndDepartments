@@ -1,6 +1,8 @@
 package com.dudka.depsEmpl.pet.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +29,7 @@ import java.util.Objects;
 @Builder
 @Entity
 @Table(name = "employee")
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,5 +64,18 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, password, phone, empRoleDeps);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", empRoleDeps=" + empRoleDeps +
+                '}';
     }
 }
