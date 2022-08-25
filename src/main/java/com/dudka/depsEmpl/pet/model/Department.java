@@ -1,10 +1,14 @@
 package com.dudka.depsEmpl.pet.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,25 +21,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Entity
 @Table(name = "department")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Department {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ToString.Exclude
     private Long id;
 
     @Column(name = "dep_name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "department", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<EmpRoleDep> empRoleDeps;
+    @JsonIgnore
+    private List<EmpRoleDep> empRoleDep;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
@@ -46,12 +57,12 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return id.equals(that.id) && name.equals(that.name) && empRoleDeps.equals(that.empRoleDeps) && companyId.equals(that.companyId);
+        return id.equals(that.id) && name.equals(that.name) && empRoleDep.equals(that.empRoleDep) && companyId.equals(that.companyId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, empRoleDeps, companyId);
+        return Objects.hash(name, empRoleDep, companyId);
     }
 
     @Override
@@ -59,7 +70,6 @@ public class Department {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", empRoleDeps=" + empRoleDeps +
                 ", companyId=" + companyId +
                 '}';
     }

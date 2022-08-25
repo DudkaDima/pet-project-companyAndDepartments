@@ -2,12 +2,16 @@ package com.dudka.depsEmpl.pet.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,14 +26,16 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 @Entity
 @Table(name = "employee")
-public class Employee implements Serializable {
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
+public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,21 +55,21 @@ public class Employee implements Serializable {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<EmpRoleDep> empRoleDeps;
+    private List<EmpRoleDep> empRoleDep;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id.equals(employee.id) && firstName.equals(employee.firstName) && lastName.equals(employee.lastName) && email.equals(employee.email) && password.equals(employee.password) && phone.equals(employee.phone) && empRoleDeps.equals(employee.empRoleDeps);
+        return id.equals(employee.id) && firstName.equals(employee.firstName) && lastName.equals(employee.lastName) && email.equals(employee.email) && password.equals(employee.password) && phone.equals(employee.phone) && empRoleDep.equals(employee.empRoleDep);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, phone, empRoleDeps);
+        return Objects.hash(firstName, lastName, email, password, phone, empRoleDep);
     }
 
     @Override
@@ -75,7 +81,7 @@ public class Employee implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", empRoleDeps=" + empRoleDeps +
+                ", empRoleDep=" + empRoleDep +
                 '}';
     }
 }
