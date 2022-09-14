@@ -20,7 +20,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT e FROM Employee e WHERE e.email = :#{#email}")
     public Optional<Employee> findByEmail(@Param("email") String email);
 
-//    @Query("select e from emp_role_dep join employee on emp_role_dep.emp_id=employee.id join department on emp_role_dep.department_id=department.id join company on company.id=department.company_id where emp_role_dep.department_id = :#{#department_id}")
     public List<Optional<Employee>> findByEmpRoleDepDepartmentId_Id(@Param("department_id") Long id);
+
+    public List<Optional<Employee>> findByEmpRoleDepCompanyId_Id(@Param("company_id") Long id);
+
+    public List<Optional<Employee>> deleteByEmpRoleDepDepartmentId_Id(@Param("department_id") Long id);
+
 
 }

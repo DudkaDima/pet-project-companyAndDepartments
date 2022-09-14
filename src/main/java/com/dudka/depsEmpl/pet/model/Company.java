@@ -48,6 +48,10 @@ public class Company {
     )
     private List<Department> departments;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<EmpRoleDep> empRoleDep;
+
 
 
     @Override

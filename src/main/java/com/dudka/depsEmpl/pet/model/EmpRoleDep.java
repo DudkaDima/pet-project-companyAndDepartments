@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 
-@Entity
+@Entity(name="emp_role_dep")
 @Table(name = "emp_role_dep")
 @Getter
 @Setter
@@ -51,6 +51,14 @@ public class EmpRoleDep implements Serializable {
     @ManyToOne(cascade = {CascadeType.ALL, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @JsonBackReference
+    @ManyToOne(cascade = {CascadeType.ALL, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    @JsonIgnore
+    private Company company;
+
+
 
     @Override
     public String toString() {

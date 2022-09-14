@@ -8,7 +8,7 @@ insert into department(id, dep_name, company_id) values(1, 'depAu', 1);
 insert into department(id, dep_name, company_id) values(2, 'depGA', 1);
 insert into department(id, dep_name, company_id) values(3, 'depASSA', 2);
 insert into department(id, dep_name, company_id) values(4, 'depXZCXZ', 2);
-insert into emp_role_dep(id, department_id, emp_id, role_id) values(1, 1, 1, 1);
-insert into emp_role_dep(id, department_id, emp_id, role_id) values(2, 2, 1, 2);
-insert into emp_role_dep(id, department_id, emp_id, role_id) values(3, 3, 2, 1);
-insert into emp_role_dep(id, department_id, emp_id, role_id) values(4, 4, 2, 2)
+insert into emp_role_dep(id, department_id, emp_id, role_id, company_id) values(1, 1, 1, 1, 1);
+insert into emp_role_dep(id, department_id, emp_id, role_id, company_id) values(2, 2, 1, 2, 1);
+insert into emp_role_dep(id, department_id, emp_id, role_id, company_id) values(3, 3, 2, 1, 2);
+insert into emp_role_dep(id, department_id, emp_id, role_id, company_id) values(4, 4, 2, 2, 2)

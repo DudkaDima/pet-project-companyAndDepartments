@@ -31,7 +31,6 @@ import java.util.Objects;
 @Table(name = "employee")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class Employee {
@@ -58,6 +57,14 @@ public class Employee {
     @JsonManagedReference
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<EmpRoleDep> empRoleDep;
+
+    public Employee(String firstName, String lastName, String email, String password, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 
     @Override
     public boolean equals(Object o) {

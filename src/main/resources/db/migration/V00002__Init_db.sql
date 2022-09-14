@@ -28,6 +28,7 @@
   department_id int8,
   emp_id int8,
   role_id int8,
+  company_id int8,
   primary key (id)
   );
   create table role (
@@ -38,6 +39,7 @@
   );
 
   alter table if exists emp_role_dep add constraint Fk_dep_all foreign key (department_id) references department;
+  alter table if exists emp_role_dep add constraint Fk_comp_all foreign key (company_id) references company;
   alter table if exists emp_role_dep add constraint Fk_emp_all foreign key (emp_id) references employee;
   alter table if exists emp_role_dep add constraint Fk_role_all foreign key (role_id) references role;
 
